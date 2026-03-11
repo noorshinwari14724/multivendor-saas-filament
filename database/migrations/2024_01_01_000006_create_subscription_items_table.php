@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('subscription_items', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('subscription_id')->constrained('subscriptions')->onDelete('cascade');
+            $table->foreignId('plan_id')->constrained('plans')->onDelete('restrict');
+            
+            // Stripe Integration
+            $table->string('stripe_id')->unique();
+            $table->string('stripe_product');
+            $table->string('stripe_price');
+            $table->integer('quantity')->nullable();
+            
+            $table->timestamps();
+
+            $table->index('subscription_id');
+            $table->index('stripe_id');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('subscription_items');
+    }
+};

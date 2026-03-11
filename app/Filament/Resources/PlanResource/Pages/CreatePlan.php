@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Filament\Resources\PlanResource\Pages;
+
+use App\Filament\Resources\PlanResource;
+use Filament\Resources\Pages\CreateRecord;
+
+class CreatePlan extends CreateRecord
+{
+    protected static string $resource = PlanResource::class;
+
+    protected function afterCreate(): void
+    {
+        \App\Models\ActivityLog::log(
+            "Plan '{$this->record->name}' was created",
+            'plan',
+            'created',
+            $this->record,
+            auth()->user(),
+            $this->record->toArray()
+        );
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+}

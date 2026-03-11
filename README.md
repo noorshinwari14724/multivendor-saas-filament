@@ -2,6 +2,12 @@
 
 A comprehensive Multi-Vendor SaaS platform built with **Laravel 11** and **Filament v3**. This admin panel provides complete management capabilities for vendors, subscription plans, users, payments, and system settings.
 
+## Screenshots
+
+### Dashboard
+![Dashboard](public/snapshots/snapshot1.png) 
+![Vendors](public/snapshots/snapshot2.png) 
+
 ## Features
 
 ### Admin Panel Features
